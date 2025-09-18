@@ -1,7 +1,4 @@
 # Credit-Card-Fraud-Detection---ML
-
-Here’s a clean and professional **README.md** draft for your project:
-
 ---
 
 # Credit Card Fraud Detection using Machine Learning
