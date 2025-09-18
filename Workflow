@@ -1,0 +1,104 @@
+
+## 🚀 Project Workflow
+
+### **Step 1: Import Libraries**
+
+```python
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+```
+
+### **Step 2: Load Data**
+
+```python
+data = pd.read_csv("creditcard.csv")
+print(data.head())
+```
+
+### **Step 3: Analyze Class Distribution**
+
+```python
+fraud = data[data['Class'] == 1]
+valid = data[data['Class'] == 0]
+outlierFraction = len(fraud) / float(len(valid))
+```
+
+### **Step 4: Explore Transaction Amounts**
+
+```python
+fraud.Amount.describe()
+valid.Amount.describe()
+```
+
+### **Step 5: Correlation Matrix**
+
+```python
+corrmat = data.corr()
+sns.heatmap(corrmat, vmax=0.8, square=True)
+```
+
+### **Step 6: Prepare Data**
+
+```python
+X = data.drop(['Class'], axis=1)
+Y = data['Class']
+
+from sklearn.model_selection import train_test_split
+xTrain, xTest, yTrain, yTest = train_test_split(
+    X.values, Y.values, test_size=0.2, random_state=42
+)
+```
+
+### **Step 7: Train Model**
+
+```python
+from sklearn.ensemble import RandomForestClassifier
+rfc = RandomForestClassifier()
+rfc.fit(xTrain, yTrain)
+yPred = rfc.predict(xTest)
+```
+
+### **Step 8: Evaluate Model**
+
+```python
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, matthews_corrcoef, confusion_matrix 
+
+print("Accuracy:", accuracy_score(yTest, yPred))
+print("Precision:", precision_score(yTest, yPred))
+print("Recall:", recall_score(yTest, yPred))
+print("F1-Score:", f1_score(yTest, yPred))
+print("MCC:", matthews_corrcoef(yTest, yPred))
+```
+
+---
+
+## 📊 Results
+
+* **Accuracy**: 99.96%
+* **Precision**: 98.73%
+* **Recall**: 79.59%
+* **F1-Score**: 88.14%
+* **MCC**: 0.8863
+
+> 🔹 The model shows **high accuracy and precision**, meaning very few false alarms. However, recall (fraud detection rate) can still be improved.
+
+---
+
+## 📈 Future Improvements
+
+* **Resampling Techniques**:
+
+  * Oversampling minority class (SMOTE).
+  * Undersampling majority class.
+* **Cost-Sensitive Learning**: Penalizing misclassifications of fraud cases more heavily.
+* **Alternative Models**: Gradient Boosting, XGBoost, or Neural Networks.
+
+---
+
+## 📬 Contact
+
+👤 **Author**: Rachit Bhatt
+📧 Email: [rachitbhatt0016@gmail.com](mailto:rachitbhatt0016@gmail.com)
+🔗 LinkedIn: [Rachit Bhatt](https://www.linkedin.com/in/)
